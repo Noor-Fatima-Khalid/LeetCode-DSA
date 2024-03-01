@@ -1,0 +1,32 @@
+
+
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) 
+    {
+        if (head == NULL) 
+            return head;
+
+        int len = 1;    // length of the list
+        ListNode* tail = head; 
+        while (tail->next != NULL) {
+            tail = tail->next;
+            len++;
+        }
+
+        k = k % len; // Reducing k if it's larger than the length of the list
+
+        // Finding the (len - k)th node
+        ListNode* new_tail = head;
+        for (int i = 0; i < len - k - 1; i++) {
+            new_tail = new_tail->next;
+        }
+
+        // Adjust pointers to perform rotation
+        tail->next = head;
+        head = new_tail->next;
+        new_tail->next = NULL;
+
+        return head;
+    }
+};
