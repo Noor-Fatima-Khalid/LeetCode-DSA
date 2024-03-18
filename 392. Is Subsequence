@@ -1,0 +1,25 @@
+  // Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        int ptr=0;
+        for (int i=0; i < s.length(); i++)
+        {
+            bool flag = false;
+            for (int j=ptr; j < t.length(); j++)
+            {
+                if (s[i] == t[j])
+                {
+                    ptr = j;
+                    ptr++;
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag)
+                return false;
+        }
+            return true;
+    }
+};
