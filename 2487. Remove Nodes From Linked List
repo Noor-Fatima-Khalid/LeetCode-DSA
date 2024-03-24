@@ -1,0 +1,43 @@
+// You are given the head of a linked list. Remove every node which has a node with a greater value anywhere to the right side of it. Return the head of the modified linked list.
+
+class Solution {
+public:
+    ListNode* reverse(ListNode* head) {
+        if (!head || head->next == NULL)
+            return head;
+        
+        ListNode *prev = NULL;
+        ListNode *curr = head;
+        while (curr != NULL)
+        {
+            ListNode *forward = curr->next;
+            curr->next = prev; 
+            prev = curr;
+            curr = forward;        
+        }
+        return prev;   
+    }
+    ListNode* removeNodes(ListNode* head) {
+        head = reverse (head);
+        stack<int> stc;
+        ListNode *temp = head;
+        while (temp != NULL)
+        {
+            if (stc.empty() || stc.top() <= temp->val)
+                stc.push(temp->val);
+            
+            temp = temp->next;
+        }
+
+        ListNode *listhead = new ListNode (stc.top());
+        stc.pop();
+        ListNode *temps = listhead;
+        while (!stc.empty())
+        {
+            temps->next = new ListNode (stc.top());
+            stc.pop();
+            temps = temps->next;
+        }
+        return listhead;
+    }
+};
