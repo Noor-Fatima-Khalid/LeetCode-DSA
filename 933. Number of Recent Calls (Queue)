@@ -1,0 +1,16 @@
+class RecentCounter {
+    queue<int> requests;
+public:
+    RecentCounter() {
+    }
+    
+    int ping(int t) { 
+        int range = t - 3000;   
+        requests.push(t);
+        if (t > 3000)
+            while (range > requests.front())
+              requests.pop();
+        
+        return requests.size();
+    }
+};
