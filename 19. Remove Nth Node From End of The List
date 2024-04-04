@@ -1,0 +1,46 @@
+        // reverse the list and remove the nth node
+class Solution {
+public:
+    ListNode* reverse(ListNode* head) {
+        if (!head || head->next == NULL)
+            return head;
+        
+        ListNode *prev = NULL;
+        ListNode *curr = head;
+        while (curr != NULL)
+        {
+            ListNode *forward = curr->next;
+            curr->next = prev; 
+            prev = curr;
+            curr = forward;        
+        }
+        return prev;
+    }
+    ListNode* removeNthFromEnd(ListNode* head, int val) {
+        // reverse and then remove nth node
+        if (!head)
+            return head;
+        head = reverse (head);
+        if (val == 1)
+        {
+            ListNode *temp = head;
+            head = head->next;
+            delete temp;
+            head = reverse (head);
+            return head;
+        }
+        int count=1;
+        for (ListNode *temp = head ; temp->next != NULL ; temp = temp->next)
+        {
+            if (val-count == 1)
+            {
+                temp->next = temp->next->next;
+                break;
+            }
+            else 
+                count++;
+        }
+        head = reverse(head);
+        return head;
+    }
+};
