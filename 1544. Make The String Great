@@ -1,0 +1,24 @@
+class Solution {
+public:
+    string makeGood(string s) {
+        if (s.size() == 1)          return s;        
+        stack<char> stc;
+
+        string ans = "";
+        for (auto ch:s) 
+        {
+            if (!stc.empty() && abs(ch - stc.top()) == 32)
+                stc.pop();
+            else
+                stc.push(ch);
+        }
+        
+        while (!stc.empty())
+        {
+            ans += stc.top();
+            stc.pop();
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
