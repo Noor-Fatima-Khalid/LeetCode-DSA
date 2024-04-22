@@ -15,19 +15,14 @@ public:
         
         for (ListNode *temp = head ; temp && temp->next != NULL ; )
         {
-            ListNode *onward = temp->next;
-            if (onward->val == val)
+            if (temp->next->val == val)
             {
-                ListNode *del = onward;
-                onward = onward->next;
+                ListNode *del = temp->next;
                 temp->next = temp->next->next;
                 delete del;
             }
             else
-            {
                 temp = temp->next;
-                onward = onward->next;
-            }
         }
         return head;
     }
