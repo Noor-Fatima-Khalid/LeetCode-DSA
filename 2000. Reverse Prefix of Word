@@ -1,0 +1,32 @@
+class Solution {
+public:
+    string reversePrefix(string word, char ch) 
+    {
+        bool flag = false;
+        stack<char> stc;
+        string ans;
+        int i;
+        for (i = 0 ; word[i] != '\0' ; i++)
+        {
+            if (word[i] == ch)
+            {
+                flag = true;
+                break;
+            }
+            stc.push (word[i]);
+        }
+        stc.push (word[i]);
+        if (!flag)
+            return word;
+
+        while (!stc.empty())
+        {
+            ans += stc.top();
+            stc.pop();
+        }
+        i++;
+        for ( ; i < word.size() ; i++)
+            ans += word[i];
+        return ans;
+    }
+};
