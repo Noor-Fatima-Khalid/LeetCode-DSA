@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int findJudge(int n, vector<vector<int>>& trust) {
+        if (trust.empty() && n==1)              return 1;
+        
+        int maxPersons = 0;
+        vector <vector<int>> trustees (n+1);
+        vector <int> count(n+1, 0);
+        for (int  i = 0 ; i < trust.size() ; i++)
+        {
+            int person1 = trust[i][0];
+            int person2 = trust[i][1];
+
+            trustees[person2].push_back(person1);
+            count[person1]++;
+
+            if (person1 > person2 && person1 > maxPersons)
+                maxPersons = person1;
+            else if (person2 > person1 && person2 > maxPersons)
+                maxPersons = person2;
+        }
+        for (int i = 1 ; i <= maxPersons ; i++)
+        {
+            if (count[i] == 0 && trustees[i].size() == maxPersons-1)
+                return i;
+        }
+        return -1;
+    }
+};
