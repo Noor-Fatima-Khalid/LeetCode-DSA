@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int findCenter(vector<vector<int>> edges) {
+        vector <int> connections(edges.size()+2, 0);
+        for (int i=0 ; i < edges.size() ; i++)
+        {
+            int u = edges[i][0];
+            int v = edges[i][1];
+
+            connections[u]++;
+            connections[v]++;
+        }
+        int max = 0;
+        int center = 0;
+        for (int i=0 ; i < connections.size() ; i++)
+        {
+            if (connections[i] > max)
+            {
+                max = connections[i];
+                center = i;
+            }
+        }
+        return center;
+    }
+};
