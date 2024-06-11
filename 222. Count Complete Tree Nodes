@@ -1,0 +1,18 @@
+class Solution {
+public:
+    void findCount(TreeNode* node,int &cnt)
+    {
+        if(node==NULL) return;
+
+        cnt++;
+        findCount(node->left,cnt);
+        findCount(node->right,cnt);
+    }
+    int countNodes(TreeNode* root) {
+        int cnt=0;
+        findCount(root,cnt);
+        return cnt;
+    }
+};
+
+// This is O(n), we have to find <0(n)
